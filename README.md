@@ -1,6 +1,6 @@
 # PyQtTemplate
 
-Template for Python projects using Qt as GUI.
+Template for Python projects using Qt as GUI. Python compatibility version: 3.11+
 
 Other files: [license file (MIT)](LICENSE), [features tracker](FEATURES.md)
 
