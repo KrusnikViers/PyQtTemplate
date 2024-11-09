@@ -1,0 +1,10 @@
+# Project files
+.idea/
+venv/
+
+# Generated files
+build/
+*_uic.py
+
+# Python-specific
+__pycache__/
