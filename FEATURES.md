@@ -3,10 +3,20 @@
 Back to [README](README.md)
 
 ### Dev-critical
+* GitHub Actions
+  * Installing Python requirements
+  * Measuring tests coverage
+  * Running Linter on the codebase
+  * Running all unittests
 
 ### Alpha-critical
+* Utils for building binaries for target OS set
 
 ### Beta-critical
+* GitHub Actions
+  * Extracting project version from code to be available for GitHub actions 
+  * Building and releasing "Nightly" binaries for target OS set
+  * Building and releasing stable binaries from "release" branch
 
 ### Critical
 

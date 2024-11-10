@@ -8,6 +8,8 @@ Other files: [license file (MIT)](LICENSE), [features tracker](FEATURES.md)
 
 * If you are using Qt Designer: add a build step with `build_tools/qt_gen_ui_files.py` script.  
   Make sure it executes during builds as well, to have the latest version of generated files.
+* Add test build target for all scripts in the directory, using `*_test.py` target pattern.  
+  UI generator should be "Before launch" step for this command.
 
 ### Adding Qt Designer in PyCharm
 
