@@ -2,14 +2,8 @@
 
 Back to [README](README.md)
 
-### Dev-critical
-* GitHub Actions
-  * Installing Python requirements
-  * Measuring tests coverage
-  * Running Linter on the codebase
-  * Running all unittests
-
 ### Alpha-critical
+* Coverage badge in README
 * Utils for building binaries for target OS set
 
 ### Beta-critical

@@ -1,4 +1,4 @@
-name: Check tests and codestyle
+name: Run checks
 
 on:
   push:
