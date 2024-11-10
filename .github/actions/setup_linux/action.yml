@@ -19,8 +19,8 @@ runs:
         libxcb-xkb1             \
         libxkbcommon-x11-0
       shell: bash
-    - name: Start Xvfb
+    - name: Start background Xvfb
       env:
-          DISPLAY: 99
-      run: Xvfb :99
+          DISPLAY: :0
+      run: sudo /usr/bin/Xvfb $DISPLAY -screen 0 1280x1024x24 &
       shell: bash
