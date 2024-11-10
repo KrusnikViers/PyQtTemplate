@@ -19,3 +19,8 @@ runs:
         libxcb-xkb1             \
         libxkbcommon-x11-0
       shell: bash
+    - name: Start Xvfb
+      env:
+          DISPLAY: 99
+      run: Xvfb :99
+      shell: bash
