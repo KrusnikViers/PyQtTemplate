@@ -40,7 +40,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Discover and run tests
-        uses: coactions/setup-xvfb@v1
+        uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
           run: python -m unittest discover -p *_test.py
 
@@ -54,15 +54,15 @@ jobs:
       - name: Setup for Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: '${{ matrix.python-version }}'
+          python-version: 3.11
       - name: Setup for Linux
         uses: ./.github/actions/setup_linux
 
       - name: Test and gather coverage data
-        uses: coactions/setup-xvfb@v1
+        uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
           run: coverage run --omit="build_tools" -m unittest discover -p *_test.py
       - name: Upload coverage data
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
