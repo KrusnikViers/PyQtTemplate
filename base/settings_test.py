@@ -1,7 +1,7 @@
 import unittest
 import re
 
-from base.settings import Settings, StoredSettings
+from base.settings import StoredSettings
 
 
 class TestSettings(unittest.TestCase):

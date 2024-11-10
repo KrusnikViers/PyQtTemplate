@@ -7,7 +7,7 @@
 from collections import namedtuple
 from enum import Enum
 
-from PySide6.QtCore import QSettings, QRect
+from PySide6.QtCore import QSettings
 
 from base.info import PROJECT_NAME, PUBLISHER_NAME
 
