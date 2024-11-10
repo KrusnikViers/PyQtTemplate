@@ -40,6 +40,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Discover and run tests
+        working-directory: ./
         run: xvfb-run python -m unittest discover -p *_test.py -v
         shell: bash
 
@@ -58,6 +59,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Test and gather coverage data
+        working-directory: ./
         run: xvfb-run coverage run --omit="build_tools" -m unittest discover -p *_test.py
         shell: bash
       - name: Upload coverage data
