@@ -4,14 +4,20 @@
 # Prefer to have similar prefixes for related settings groups.
 
 
-from collections import namedtuple
 from enum import Enum
+from typing import TypeVar, Type, NamedTuple
 
 from PySide6.QtCore import QSettings
 
 from base.info import PROJECT_NAME, PUBLISHER_NAME
 
-_StoredSettingMeta = namedtuple('StoredSettingMeta', 'stored_name type default_value')
+_SType = TypeVar("_SType")
+
+
+class _StoredSettingsMeta[_SType](NamedTuple):
+    stored_name: str
+    type: Type[_SType]
+    default_value: _SType
 
 
 # Add new values to be stored in this enum.
@@ -26,10 +32,10 @@ class Settings:
         return QSettings(PUBLISHER_NAME, PROJECT_NAME)
 
     @classmethod
-    def set(cls, key: StoredSettings, value):
+    def set(cls, key: StoredSettings, value: _StoredSettingsMeta) -> None:
         assert isinstance(value, key.value.type)
         cls._qt_adapter().setValue(key.value.stored_name, value)
 
     @classmethod
-    def get(cls, key: StoredSettings):
+    def get(cls, key: StoredSettings) -> _SType:
         return cls._qt_adapter().value(key.value.stored_name, defaultValue=key.value.default_value, type=key.value.type)
