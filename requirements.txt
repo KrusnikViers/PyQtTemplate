@@ -1,1 +1,2 @@
-PySide6 ~= 6.8 # Linking with Qt for UI
+PySide6 ~= 6.8 # Linking with Qt for UI.
+pyinstaller ~= 6.16 # Building binary out of Python code.

@@ -1,0 +1,26 @@
+name: Run checks
+
+on:
+  push:
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    name: Build Linux binary
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup for Project
+        uses: ./.github/actions/setup_project
+        with:
+          python-version: '3.13'
+      - name: Setup for Linux
+        uses: ./.github/actions/setup_linux
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.6'
+          spec: 'build_tools/pyinstaller/binary.spec'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'PyQtTemplate Linux Binary'
+          options: --onefile, --name "PyQtTemplate", --windowed,
