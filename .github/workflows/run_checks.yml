@@ -15,7 +15,7 @@ jobs:
       - name: Setup for Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: 3.11
+          python-version: 3.13
 
       - name: flake8 Lint
         uses: py-actions/flake8@v2
@@ -28,7 +28,7 @@ jobs:
     name: Run tests
     strategy:
       matrix:
-        python-version: [ '3.11', '3.12', '3.13' ]
+        python-version: [ '3.13' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
