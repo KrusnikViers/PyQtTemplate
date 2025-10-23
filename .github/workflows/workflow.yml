@@ -24,9 +24,7 @@ jobs:
         uses: py-actions/flake8@v2
         with:
           max-line-length: "121"
-          exclude:
-            - "__init__.py"
-            - "*_uic.py"
+          exclude: "__init__.py,*_uic.py"
 
   check-tests:
     runs-on: ubuntu-latest
