@@ -6,7 +6,6 @@ on:
     - cron: '0 9 * * 1,4'
 
 env:
-  PYTHON_VERSION_MATRIX: &PYTHON_VERSION_MATRIX [ '3.12', '3.13' ]
   PYTHON_VERSION: &PYTHON_VERSION '3.12'
 
 jobs:
@@ -34,7 +33,7 @@ jobs:
     name: Run tests
     strategy:
       matrix:
-        python-version: *PYTHON_VERSION_MATRIX
+        python-version: [ '3.12', '3.13' ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
