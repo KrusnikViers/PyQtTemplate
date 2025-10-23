@@ -5,6 +5,10 @@ Back to [README](README.md)
 ### Alpha-critical
 * Coverage badge in README
 * Utils for building binaries for target OS set
+* GitHub Actions
+  * Keep Python versions in a single place
+  * Check master on schedule and on push
+  * Build binaries on every push
 
 ### Beta-critical
 * GitHub Actions

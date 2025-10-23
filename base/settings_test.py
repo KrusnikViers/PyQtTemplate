@@ -1,14 +1,14 @@
-import unittest
 import re
+import unittest
 
-from base.settings import StoredSettings
+from base.settings import Settings
 
 
 class TestSettings(unittest.TestCase):
     def test_validate_stored_keys(self):
         keys_set = set()
-        for settings_value in StoredSettings:
-            stored_key = settings_value.value.stored_name
+        for settings_value in Settings:
+            stored_key = settings_value.value.name
 
             self.assertTrue(stored_key, "Stored key for {} is empty.".format(settings_value.name))
             self.assertTrue(re.match(r'^[\w/\-]*$', stored_key),
@@ -22,6 +22,6 @@ class TestSettings(unittest.TestCase):
             keys_set.add(stored_key)
 
     def test_validate_default_value_types(self):
-        for settings_value in StoredSettings:
-            self.assertTrue(isinstance(settings_value.value.default_value, settings_value.value.type),
-                            'Default value for {} should be {}'.format(settings_value.name, settings_value.value.type))
+        for setting in Settings:
+            self.assertTrue(isinstance(setting.value.default, setting.value.type),
+                            'Default value for {} should be {}'.format(setting.name, setting.value.type))
