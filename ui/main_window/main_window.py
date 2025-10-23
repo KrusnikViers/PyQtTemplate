@@ -2,7 +2,8 @@ from PySide6.QtCore import Signal, QSize, QPoint, QRect
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMainWindow, QApplication
 
-from base import PROJECT_FULL_NAME, Settings
+from base.info import PROJECT_FULL_NAME
+from base.settings import Settings
 from ui.main_window.main_window_uic import Ui_MainWindow
 from ui.main_window.status_bar import StatusBar
 

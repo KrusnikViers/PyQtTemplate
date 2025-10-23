@@ -3,7 +3,7 @@ import sys
 from PySide6.QtCore import Slot, Qt
 from PySide6.QtWidgets import QApplication
 
-from ui.main_window import MainWindow
+from ui.main_window.main_window import MainWindow
 
 
 class Application(QApplication):
