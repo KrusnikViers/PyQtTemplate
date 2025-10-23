@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 9 * * 1,4'
 
+PYTHON_VERSION_MATRIX: &PYTHON_VERSION_MATRIX [ '3.12', '3.13' ]
+PYTHON_VERSION: &PYTHON_VERSION '3.12'
+
 jobs:
   flake8-lint:
     runs-on: ubuntu-latest
@@ -15,20 +18,22 @@ jobs:
       - name: Setup for Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: '3.12'
+          python-version: *PYTHON_VERSION
 
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
           max-line-length: "121"
-          exclude: "__init__.py"
+          exclude:
+            - "__init__.py"
+            - "*_uic.py"
 
   check-tests:
     runs-on: ubuntu-latest
     name: Run tests
     strategy:
       matrix:
-        python-version: [ '3.12', '3.13' ]
+        python-version: *PYTHON_VERSION_MATRIX
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -54,7 +59,7 @@ jobs:
       - name: Setup for Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: 3.11
+          python-version: *PYTHON_VERSION
       - name: Setup for Linux
         uses: ./.github/actions/setup_linux
 
@@ -77,13 +82,31 @@ jobs:
       - name: Setup for Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: '3.12'
+          python-version: *PYTHON_VERSION
       - name: Setup for Linux
         uses: ./.github/actions/setup_linux
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
-          python_ver: '3.12'
+          python_ver: *PYTHON_VERSION
           spec: 'build_tools/pyinstaller/binary.spec'
           requirements: 'requirements.txt'
           upload_exe_with_name: 'PyQtTemplate Linux Binary'
+  build-windows:
+    runs-on: windows-latest
+    if: github.event_name == 'push' # This job only runs on push events
+    name: Build Windows binary
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup for Project
+        uses: ./.github/actions/setup_project
+        with:
+          python-version: *PYTHON_VERSION
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: *PYTHON_VERSION
+          spec: 'build_tools/pyinstaller/binary.spec'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'PyQtTemplate Windows Binary'
