@@ -1,0 +1,61 @@
+name: Build Binaries
+
+on:
+  workflow_run:
+    workflows: ["Run Checks"]
+    types:
+      - completed
+
+env:
+  PYTHON_VERSION: &PYTHON_VERSION '3.14'
+
+jobs:
+  define-version:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.conclusion == 'success' && 
+      github.event.workflow_run.event == 'push'
+    name: Versioning
+    steps:
+      - name: Write version
+        run: echo "0.0a" >> "$GITHUB_OUTPUT"
+
+  build-linux:
+    runs-on: ubuntu-latest
+    name: Build Linux binary
+    needs: define-version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Project
+        uses: ./.github/actions/setup_project
+        with:
+          python-version: *PYTHON_VERSION
+      - name: Setup Linux
+        uses: ./.github/actions/setup_linux
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: *PYTHON_VERSION
+          spec: 'build_tools/pyinstaller/binary.spec'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'PyQtTemplate Linux Binary'
+
+  build-windows:
+    runs-on: windows-latest
+    name: Build Windows binary
+    needs: define-version
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Project
+        uses: ./.github/actions/setup_project
+        with:
+          python-version: *PYTHON_VERSION
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: *PYTHON_VERSION
+          spec: 'build_tools/pyinstaller/binary.spec'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'PyQtTemplate Windows Binary'
