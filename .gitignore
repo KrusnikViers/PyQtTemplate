@@ -4,6 +4,7 @@ venv/
 
 # Generated files
 build/
+dist/
 *_uic.py
 
 # Python-specific

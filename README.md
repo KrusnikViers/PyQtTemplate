@@ -19,3 +19,15 @@ Settings => Tools => External Tools
 Program: `$ProjectFileDir$\venv\Lib\site-packages\PySide6\designer.exe`  
 Arguments: `$FilePath$`  
 Directory: `$ProjectFileDir$`
+
+### Suggested Workflows for PyCharm
+* `Gen UI`
+  * Python script `$ProjectFileDir$/build_tools/qt_gen_ui_files.py`
+  * Add this step as a pre-requisite for all the next steps
+* `Run App`
+  * Python script `$ProjectFileDir$/main.py`
+* `Run Tests`
+  * Unittests in project root directory, pattern `*_test.py`
+* `Build Binary`
+  * Python Module `PyInstaller`
+  * Arguments: `$ProjectFileDir$/build_tools/pyinstaller/binary.spec`
