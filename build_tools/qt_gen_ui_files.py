@@ -57,9 +57,13 @@ def generate_files(target_dir: Path) -> int:
     return len(ui_files_list)
 
 
-if __name__ == "__main__":
-    root_dir = Path(__file__).parent.parent.resolve()
-    print('Target directory: {}'.format(str(root_dir)))
-    remove_generated_files(root_dir)
-    generate_files(root_dir)
+def regenerate_files(target_dir: Path) -> None:
+    print('Target directory: {}'.format(str(target_dir)))
+    remove_generated_files(target_dir)
+    generate_files(target_dir)
     print('All done!')
+
+
+if __name__ == "__main__":  # pragma: no cover
+    root_dir = Path(__file__).parent.parent.resolve()
+    regenerate_files(root_dir)
