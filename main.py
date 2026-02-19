@@ -4,7 +4,7 @@ from typing import Self, ClassVar
 from PySide6.QtCore import Slot, Qt
 from PySide6.QtWidgets import QApplication
 
-from ui.main_window.main_window import MainWindow
+from ui.main_window import main_window
 
 
 class Application(QApplication):
@@ -13,7 +13,7 @@ class Application(QApplication):
     def __init__(self):
         super().__init__(sys.argv)
 
-        self.main_window = MainWindow()
+        self.main_window = main_window.MainWindow()
         self.main_window.application_exit_requested.connect(self.on_exit_requested)
 
     @classmethod

@@ -31,6 +31,10 @@ class QtGetUiTest(unittest.TestCase):
             else:
                 shutil.rmtree(str(file_path))
 
+    def test_empty_run(self):
+        self.local_test_dir.joinpath('test_form.ui').unlink()
+        qt_gen_ui_files.regenerate_files(self.local_test_dir)
+
     def test_generate_files(self):
         self.assertEqual(qt_gen_ui_files.generate_files(self.local_test_dir), 1)
         self.assertTrue(self.local_test_dir.joinpath('test_form_uic.py').is_file())

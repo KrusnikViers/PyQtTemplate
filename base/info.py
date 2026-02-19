@@ -10,6 +10,7 @@ PROJECT_URL = "https://github.com/KrusnikViers/PyQtTemplate"
 PROJECT_COMPATIBILITY_VERSION = 0
 PROJECT_FEATURE_PACK_VERSION = 0
 PROJECT_RELEASE_VERSION = 0
+
 # Build type value can (and should) be assigned based by the build agent based on build purpose.
 BUILD_TYPE_INDICATOR = os.getenv('BUILD_TYPE-{}'.format(PROJECT_NAME), default='d')
 
