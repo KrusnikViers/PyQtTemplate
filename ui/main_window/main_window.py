@@ -14,20 +14,13 @@ class MainWindow(QMainWindow):
     application_exit_requested = Signal()
 
     def closeEvent(self, event: QCloseEvent) -> None:
-        # Signal Application class that exit was requested. If successful, it will set |application_closing| flag and
-        # initiate the window closing again.
-        if self.application_closing:
-            super().closeEvent(event)
-            return
+        # Signal Application class that exit was requested. If successful, it will close the window itself.
         event.ignore()
         self._store_geometry()
         self.application_exit_requested.emit()
 
     def __init__(self):
         super().__init__()
-
-        # Can be set by Application to indicate that all checks before closing were done.
-        self.application_closing = False
 
         self.ui = main_window_uic.Ui_MainWindow()
         self.ui.setupUi(self)

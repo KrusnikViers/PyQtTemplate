@@ -25,8 +25,8 @@ class Application(QApplication):
 
     @Slot()
     def on_exit_requested(self):
-        # Do any pre-exit checks here. Return before the following lines to interrupt application closing.
-        self.main_window.application_closing = True
+        # Do any pre-exit checks here.
+        # Return before the following lines to interrupt application closing.
         self.main_window.close()
         self.quit()
 
