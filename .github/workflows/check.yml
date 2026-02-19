@@ -43,7 +43,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Discover and run tests
-        run: xvfb-run python -m unittest discover -p *_test.py
+        run: xvfb-run python -m unittest discover -p '*_test.py'
 
   measure-coverage:
     runs-on: ubuntu-latest
@@ -60,7 +60,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Test and gather coverage data
-        run: coverage run xvfb-run -m unittest discover -p *_test.py
+        run: coverage run xvfb-run -m unittest discover -p '*_test.py'
       - name: Upload coverage data
         uses: codecov/codecov-action@v5
         env:
