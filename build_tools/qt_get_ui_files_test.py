@@ -24,6 +24,7 @@ class QtGetUiTest(unittest.TestCase):
         for temp_file in temp_files_list:
             if temp_file in self.initial_set_of_files:
                 continue
+
             file_path = Path(temp_file)
             if file_path.is_file():
                 file_path.unlink()
