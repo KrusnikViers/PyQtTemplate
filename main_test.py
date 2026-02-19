@@ -20,7 +20,7 @@ class MainApplicationTest(unittest.TestCase):
     def test_main_starts_and_finishes(self):
         # Create an App early for timers to latch on.
         app = Application.get_or_create()
-        QTimer.singleShot(500, _simulate_normal_close)
+        QTimer.singleShot(2000, _simulate_normal_close)
         QTimer.singleShot(3000, _force_quit)
 
         return_code = app.exec()
