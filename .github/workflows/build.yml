@@ -16,9 +16,13 @@ jobs:
       github.event.workflow_run.conclusion == 'success' && 
       github.event.workflow_run.event == 'push'
     name: Versioning
+    outputs:
+      project_version: ${{ steps.get_version.outputs.VERSION }}
     steps:
-      - name: Write version
-        run: echo "0.0a" >> "$GITHUB_OUTPUT"
+      - name: Calculate version
+        id: get_version
+        run: echo VERSION=0.0a >> "$GITHUB_OUTPUT"
+        # Retrieval: ${{ needs.define-version.outputs.project_version }}
 
   build-linux:
     runs-on: ubuntu-latest
