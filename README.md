@@ -1,26 +1,17 @@
 # PyQtTemplate
 
-Template for Python projects using Qt as GUI. Python compatibility version: 3.11+
+[![codecov](https://codecov.io/gh/KrusnikViers/PyQtTemplate/graph/badge.svg)](https://codecov.io/gh/KrusnikViers/PyQtTemplate)
 
-Other files: [license file (MIT)](LICENSE), [features tracker](FEATURES.md)
+Template for Python projects using Qt as GUI.  
+Other files: [License file (MIT)](LICENSE), [Features tracker](FEATURES.md)
 
 ## Setting up the project
 
-* If you are using Qt Designer: add a build step with `build_tools/qt_gen_ui_files.py` script.  
-  Make sure it executes during builds as well, to have the latest version of generated files.
-* Add a Python build target for `main.py` in the project root directory.
-  UI generator should be a dependency for this step.
-* Add a Unittests build target for all scripts in the directory, using `*_test.py` target pattern.  
-  UI generator should be a dependency for this step.
+For badges to work correctly
+1. Update badge link in the README
+2. Add `CODECOV_TOKEN` from [codecov.io](https://codecov.io) to Repository Action secrets
 
-### Adding Qt Designer in PyCharm
-
-Settings => Tools => External Tools  
-Program: `$ProjectFileDir$\venv\Lib\site-packages\PySide6\designer.exe`  
-Arguments: `$FilePath$`  
-Directory: `$ProjectFileDir$`
-
-### Suggested Workflows for PyCharm
+### Suggested Workflows / Run Configurations
 * `Gen UI`
   * Python script `$ProjectFileDir$/build_tools/qt_gen_ui_files.py`
   * Add this step as a pre-requisite for all the next steps
@@ -31,3 +22,11 @@ Directory: `$ProjectFileDir$`
 * `Build Binary`
   * Python Module `PyInstaller`
   * Arguments: `$ProjectFileDir$/build_tools/pyinstaller/binary.spec`
+
+### Adding Qt Designer in PyCharm
+
+Settings => Tools => External Tools  
+Program: `$ProjectFileDir$\venv\Lib\site-packages\PySide6\designer.exe`  
+Arguments: `$FilePath$`  
+Directory: `$ProjectFileDir$`
+

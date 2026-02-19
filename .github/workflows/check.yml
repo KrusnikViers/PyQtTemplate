@@ -64,8 +64,8 @@ jobs:
       - name: Test and gather coverage data
         uses: coactions/setup-xvfb@6b00cf1889f4e1d5a48635647013c0508128ee1a
         with:
-          run: coverage run --omit="build_tools" -m unittest discover -p *_test.py
+          run: coverage run -m unittest discover -p *_test.py
       - name: Upload coverage data
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
