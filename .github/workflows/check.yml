@@ -60,7 +60,7 @@ jobs:
         uses: ./.github/actions/setup_linux
 
       - name: Test and gather coverage data
-        run: coverage run xvfb-run -m unittest discover -p '*_test.py'
+        run: xvfb-run coverage run -m unittest discover -p '*_test.py'
       - name: Upload coverage data
         uses: codecov/codecov-action@v5
         env:
