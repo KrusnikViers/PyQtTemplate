@@ -1,2 +1,3 @@
 ignore:
   - "**/*_test.py"  # Ignore test files themselves, to not bloat the coverage numbers.
+  - "*_test.py"  # Ignore top-level test files as well.
