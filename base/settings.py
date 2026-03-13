@@ -8,7 +8,7 @@ from typing import TypeVar, Type, Generic
 
 from PySide6.QtCore import QSettings, QRect
 
-from base.info import PROJECT_NAME, PUBLISHER_NAME
+from base import info
 
 _SType = TypeVar("_SType")
 
@@ -30,7 +30,7 @@ class Settings(Enum):
     def _qt_adapter():
         # TODO: Make sure that the settings will be synced on exit, and do not sync unnecessarily.
         # QSettings implementation takes care of the values caching.
-        return QSettings(PUBLISHER_NAME, PROJECT_NAME)
+        return QSettings(info.PUBLISHER_NAME, info.PROJECT_NAME)
 
     def set(self, value) -> None:
         assert isinstance(value, self.value.type)

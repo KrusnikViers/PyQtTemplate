@@ -25,8 +25,8 @@ For badges to work correctly
 
 ### Adding Qt Designer in PyCharm
 
-Settings => Tools => External Tools  
-Program: `$ProjectFileDir$\venv\Lib\site-packages\PySide6\designer.exe`  
+Settings ⇒ Tools ⇒ External Tools  
+Program: `$ProjectFileDir$\.venv\Lib\site-packages\PySide6\designer.exe`  
 Arguments: `$FilePath$`  
 Directory: `$ProjectFileDir$`
 
