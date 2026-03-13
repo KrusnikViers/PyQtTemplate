@@ -4,7 +4,7 @@
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import TypeVar, Type, Generic, Self
+from typing import TypeVar, Type, Generic
 
 from PySide6.QtCore import QSettings, QRect
 
