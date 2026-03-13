@@ -42,6 +42,7 @@ jobs:
         with:
           python_ver: *PYTHON_VERSION
           spec: 'build_tools/pyinstaller/binary.spec'
+          clean_checkout: false
           requirements: 'requirements.txt'
           upload_exe_with_name: 'PyQtTemplate Linux Binary'
 
@@ -61,5 +62,6 @@ jobs:
         with:
           python_ver: *PYTHON_VERSION
           spec: 'build_tools/pyinstaller/binary.spec'
+          clean_checkout: false
           requirements: 'requirements.txt'
           upload_exe_with_name: 'PyQtTemplate Windows Binary'
