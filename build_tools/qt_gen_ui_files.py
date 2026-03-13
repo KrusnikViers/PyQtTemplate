@@ -16,7 +16,8 @@ _UI_FILE_SUFFIX = '.ui'
 
 
 def _assert_is_file(file: Path):
-    assert file.is_file(), 'Error: {} cannot be treated as a file'.format(str(file.resolve()))
+    if not file.is_file():
+        raise ValueError(f"{str(file.resolve())} cannot be treated as a file")
 
 
 def remove_generated_files(target_dir: Path) -> int:
@@ -49,7 +50,6 @@ def generate_files(target_dir: Path) -> int:
         ui_file = Path(ui_file_path)
         _assert_is_file(ui_file)
         gen_file_name = ui_file.name[:-len(_UI_FILE_SUFFIX)] + _GEN_FILE_SUFFIX
-        # gen_file = target_dir / ui_file.relative_to(target_dir).with_name(gen_file_name)
         gen_file = ui_file.with_name(gen_file_name)
         print('{} => {}'.format(str(ui_file.relative_to(target_dir)), gen_file.name))
         run(['pyside6-uic', '-g', 'python', '-o', str(gen_file), str(ui_file)], timeout=30.0, check=True)

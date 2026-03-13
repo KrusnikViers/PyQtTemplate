@@ -4,7 +4,7 @@
 
 from dataclasses import dataclass
 from enum import Enum
-from typing import TypeVar, Type, Generic
+from typing import TypeVar, Type, Generic, Self
 
 from PySide6.QtCore import QSettings, QRect
 
@@ -33,7 +33,8 @@ class Settings(Enum):
         return QSettings(info.PUBLISHER_NAME, info.PROJECT_NAME)
 
     def set(self, value) -> None:
-        assert isinstance(value, self.value.type)
+        if not isinstance(value, self.value.type):
+            raise TypeError(f"Wrong type to set for {self.value.name}: {type(value)} vs {self.value.type}")
         self._qt_adapter().setValue(self.value.name, value)
 
     def get(self) -> _SType:

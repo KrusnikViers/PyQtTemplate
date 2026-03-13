@@ -6,6 +6,9 @@ from pathlib import Path
 
 from build_tools import qt_gen_ui_files
 
+_TEST_FILE_UI = 'test_form.ui'
+_TEST_FILE_GEN_UI = 'test_form_uic.py'
+
 
 class QtGetUiTest(unittest.TestCase):
     local_test_dir = Path(os.path.realpath(__file__)).parent / 'test_data'
@@ -32,18 +35,18 @@ class QtGetUiTest(unittest.TestCase):
                 shutil.rmtree(str(file_path))
 
     def test_empty_run(self):
-        self.local_test_dir.joinpath('test_form.ui').unlink()
+        self.local_test_dir.joinpath(_TEST_FILE_UI).unlink()
         qt_gen_ui_files.regenerate_files(self.local_test_dir)
 
     def test_generate_files(self):
         self.assertEqual(qt_gen_ui_files.generate_files(self.local_test_dir), 1)
-        self.assertTrue(self.local_test_dir.joinpath('test_form_uic.py').is_file())
+        self.assertTrue(self.local_test_dir.joinpath(_TEST_FILE_GEN_UI).is_file())
 
     def test_remove_generated_files(self):
         qt_gen_ui_files.generate_files(self.local_test_dir)
         self.assertEqual(qt_gen_ui_files.remove_generated_files(self.local_test_dir), 1)
-        self.assertFalse(self.local_test_dir.joinpath('test_form_uic.py').is_file())
+        self.assertFalse(self.local_test_dir.joinpath(_TEST_FILE_GEN_UI).is_file())
 
     def test_regenerate_files(self):
         qt_gen_ui_files.regenerate_files(self.local_test_dir)
-        self.assertTrue(self.local_test_dir.joinpath('test_form_uic.py').is_file())
+        self.assertTrue(self.local_test_dir.joinpath(_TEST_FILE_GEN_UI).is_file())

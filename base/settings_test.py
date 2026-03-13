@@ -18,10 +18,10 @@ class TestSettings(unittest.TestCase):
                             'Stored key {} should be in lower register to avoid cross-system conflicts.'.format(
                                 stored_key))
 
-            self.assertFalse(stored_key in keys_set, 'Duplicate stored key: {}'.format(stored_key))
+            self.assertNotIn(stored_key, keys_set, 'Duplicate stored key: {}'.format(stored_key))
             keys_set.add(stored_key)
 
     def test_validate_default_value_types(self):
         for setting in settings.Settings:
-            self.assertTrue(isinstance(setting.value.default, setting.value.type),
-                            'Default value for {} should be {}'.format(setting.name, setting.value.type))
+            self.assertIsInstance(setting.value.default, setting.value.type,
+                                  'Default value for {} should be {}'.format(setting.name, setting.value.type))

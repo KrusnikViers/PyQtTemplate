@@ -1,1 +1,0 @@
-from build_tools.qt_gen_ui_files import generate_files, remove_generated_files
