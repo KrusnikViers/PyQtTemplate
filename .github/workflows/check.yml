@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: '0 9 * * 1,4'
 
+permissions: {}
+
 env:
   PYTHON_VERSION: &PYTHON_VERSION '3.14'
 
@@ -15,13 +17,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
           python-version: *PYTHON_VERSION
 
       - name: flake8 Lint
-        uses: py-actions/flake8@v2
+        uses: py-actions/flake8@84ec6726560b6d5bd68f2a5bed83d62b52bb50ba
         with:
           max-line-length: "121"
           exclude: "__init__.py,*_uic.py"
@@ -35,6 +39,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
@@ -52,6 +58,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
@@ -62,6 +70,6 @@ jobs:
       - name: Test and gather coverage data
         run: xvfb-run coverage run -m unittest discover -p '*_test.py'
       - name: Upload coverage data
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
