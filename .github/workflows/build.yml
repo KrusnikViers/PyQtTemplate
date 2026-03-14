@@ -3,6 +3,8 @@ name: Build Binaries
 on:
   push:
 
+permissions: {}
+
 env:
   PYTHON_VERSION: &PYTHON_VERSION '3.14'
 
@@ -22,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Build Linux binary
     needs: define-version
+    permissions:
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,6 +50,8 @@ jobs:
     runs-on: windows-latest
     name: Build Windows binary
     needs: define-version
+    permissions:
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4

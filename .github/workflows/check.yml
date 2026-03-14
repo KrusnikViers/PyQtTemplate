@@ -5,6 +5,8 @@ on:
   schedule:
     - cron: '0 9 * * 1,4'
 
+permissions: {}
+
 env:
   PYTHON_VERSION: &PYTHON_VERSION '3.14'
 
