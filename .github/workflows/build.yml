@@ -1,10 +1,7 @@
 name: Build Binaries
 
 on:
-  workflow_run:
-    workflows: ["Run Checks"]
-    types:
-      - completed
+  push:
 
 env:
   PYTHON_VERSION: &PYTHON_VERSION '3.14'
@@ -12,9 +9,6 @@ env:
 jobs:
   define-version:
     runs-on: ubuntu-latest
-    if: >
-      github.event.workflow_run.conclusion == 'success' && 
-      github.event.workflow_run.event == 'push'
     name: Versioning
     outputs:
       project_version: ${{ steps.get_version.outputs.VERSION }}
@@ -31,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
@@ -38,7 +34,7 @@ jobs:
       - name: Setup Linux
         uses: ./.github/actions/setup_linux
       - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
+        uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
         with:
           python_ver: *PYTHON_VERSION
           spec: 'build_tools/pyinstaller/binary.spec'
@@ -53,12 +49,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
           python-version: *PYTHON_VERSION
       - name: Create Executable
-        uses: sayyid5416/pyinstaller@v1
+        uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
         with:
           python_ver: *PYTHON_VERSION
           spec: 'build_tools/pyinstaller/binary.spec'
