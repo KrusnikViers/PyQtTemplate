@@ -6,7 +6,7 @@ on:
 permissions: {}
 
 env:
-  PYTHON_VERSION: &PYTHON_VERSION '3.14'
+  PYTHON_VERSION: '3.14'
 
 jobs:
   define-version:
@@ -34,13 +34,13 @@ jobs:
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: *PYTHON_VERSION
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Setup Linux
         uses: ./.github/actions/setup_linux
       - name: Create Executable
         uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
         with:
-          python_ver: *PYTHON_VERSION
+          python_ver: ${{ env.PYTHON_VERSION }}
           spec: 'build_tools/pyinstaller/binary.spec'
           clean_checkout: false
           requirements: 'requirements.txt'
@@ -60,11 +60,11 @@ jobs:
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: *PYTHON_VERSION
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Create Executable
         uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
         with:
-          python_ver: *PYTHON_VERSION
+          python_ver: ${{ env.PYTHON_VERSION }}
           spec: 'build_tools/pyinstaller/binary.spec'
           clean_checkout: false
           requirements: 'requirements.txt'

@@ -8,7 +8,7 @@ on:
 permissions: {}
 
 env:
-  PYTHON_VERSION: &PYTHON_VERSION '3.14'
+  PYTHON_VERSION: '3.14'
 
 jobs:
   flake8-lint:
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: *PYTHON_VERSION
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: flake8 Lint
         uses: py-actions/flake8@84ec6726560b6d5bd68f2a5bed83d62b52bb50ba
@@ -63,7 +63,7 @@ jobs:
       - name: Setup Project
         uses: ./.github/actions/setup_project
         with:
-          python-version: *PYTHON_VERSION
+          python-version: ${{ env.PYTHON_VERSION }}
       - name: Setup Linux
         uses: ./.github/actions/setup_linux
 
