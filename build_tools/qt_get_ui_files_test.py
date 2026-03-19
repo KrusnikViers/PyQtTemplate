@@ -50,3 +50,8 @@ class QtGetUiTest(unittest.TestCase):
     def test_regenerate_files(self):
         qt_gen_ui_files.regenerate_files(self.local_test_dir)
         self.assertTrue(self.local_test_dir.joinpath(_TEST_FILE_GEN_UI).is_file())
+
+    def test_not_a_file(self):
+        self.local_test_dir.joinpath('not_a_file.ui').mkdir()
+        with self.assertRaises(ValueError):
+            qt_gen_ui_files.generate_files(self.local_test_dir)

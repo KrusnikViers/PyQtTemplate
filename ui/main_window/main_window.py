@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         self._restore_geometry()
 
     def _restore_geometry(self):
-        stored_geometry: QRect = settings.Settings.UI_MAIN_WINDOW_GEOMETRY.get()
+        stored_geometry: QRect = settings.UI_MAIN_WINDOW_GEOMETRY.get()
         self.setGeometry(stored_geometry)
 
         # Check that some area around top-left part of the window is visible on one of the screens.
@@ -48,4 +48,4 @@ class MainWindow(QMainWindow):
             self.setGeometry(QRect(current_screen.center() - half_min_size_point, min_size))
 
     def _store_geometry(self) -> None:
-        settings.Settings.UI_MAIN_WINDOW_GEOMETRY.set(self.geometry())
+        settings.UI_MAIN_WINDOW_GEOMETRY.set(self.geometry())

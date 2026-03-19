@@ -3,8 +3,7 @@
 # between sessions.
 
 from dataclasses import dataclass
-from enum import Enum
-from typing import TypeVar, Type, Generic
+from typing import TypeVar, Type, Generic, Any
 
 from PySide6.QtCore import QSettings, QRect
 
@@ -13,29 +12,27 @@ from base import info
 _SType = TypeVar("_SType")
 
 
+def _qt_adapter() -> QSettings:
+    # QSettings implementation takes care of the values caching. Creating/destructing this wrapper is very fast.
+    return QSettings(info.PUBLISHER_NAME, info.PROJECT_NAME)
+
+
 @dataclass
-class _SettingsMeta(Generic[_SType]):
+class OptionDefinition(Generic[_SType]):
     name: str
     type: Type[_SType]
     default: _SType
 
-
-# Add new values to be stored in this enum.
-class Settings(Enum):
-    # Example: MY_VALUE = _SettingsMeta('base/my_setting', int, 42)
-    # They could be used as Settings.MY_VALUE.set(43) and Settings.MY_VALUE.get()
-    UI_MAIN_WINDOW_GEOMETRY = _SettingsMeta('ui/main_window_geometry', QRect, QRect())
-
-    @staticmethod
-    def _qt_adapter():
-        # TODO: Make sure that the settings will be synced on exit, and do not sync unnecessarily.
-        # QSettings implementation takes care of the values caching.
-        return QSettings(info.PUBLISHER_NAME, info.PROJECT_NAME)
-
-    def set(self, value) -> None:
-        if not isinstance(value, self.value.type):
-            raise TypeError(f"Wrong type to set for {self.value.name}: {type(value)} vs {self.value.type}")
-        self._qt_adapter().setValue(self.value.name, value)
+    def set(self, value: Any) -> None:
+        if not isinstance(value, self.type):
+            raise TypeError(f"Wrong type to set for {self.name}: {type(value)} vs {self.type}")
+        _qt_adapter().setValue(self.name, value)
 
     def get(self) -> _SType:
-        return self._qt_adapter().value(self.value.name, defaultValue=self.value.default, type=self.value.type)
+        return _qt_adapter().value(self.name, defaultValue=self.default, type=self.type)
+
+
+# Add new settings (values to be stored persistently between launches) below.
+# Separate groups of settings as group_name/setting_name: MY_VALUE = OptionDefinition('base/my_setting', int, 42).
+# To use in code, call MY_VALUE.set(43) and MY_VALUE.get().
+UI_MAIN_WINDOW_GEOMETRY = OptionDefinition('ui/main_window_geometry', QRect, QRect())
