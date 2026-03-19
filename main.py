@@ -8,7 +8,7 @@ from ui.main_window import main_window
 
 
 class Application(QApplication):
-    _app_instance: ClassVar[Application | None] = None
+    _app_instance: ClassVar[Self | None] = None
 
     def __init__(self):
         super().__init__(sys.argv)
