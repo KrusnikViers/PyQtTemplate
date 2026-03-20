@@ -1,4 +1,4 @@
-name: Build Binaries
+name: Build
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
             dist_name: 'PyQtTemplate Win64'
 
     runs-on: ${{ matrix.os }}
-    name: Package binary
+    name: Binary
     permissions:
       id-token: write
 
@@ -53,6 +53,12 @@ jobs:
       - name: Setup Linux
         if: matrix.os == 'ubuntu-latest'
         uses: ./.github/actions/setup_linux
+      - name: Debug File Content
+        run: |
+          pwd
+          echo "Checking file existence and content:"
+          ls -l base/git_info.py
+          cat base/git_info.py        
 
       - name: Create Executable
         uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
