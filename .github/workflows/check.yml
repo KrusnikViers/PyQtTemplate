@@ -1,14 +1,12 @@
 name: Check
-
+permissions: { }
 on:
   push:
   schedule:
     - cron: '0 9 * * 1,4'
-
-permissions: {}
-
 env:
   PYTHON_VERSION: '3.14'
+
 
 jobs:
   lint:

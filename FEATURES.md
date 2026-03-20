@@ -7,6 +7,7 @@ Back to [README](README.md)
 ### Beta-critical
 
 ### Release-critical
+* Add a manual workflow to build a tagged Release from the current master
 
 ### Priority
 
