@@ -1,7 +1,6 @@
 # General project name and version constants. Refer to these constants whenever possible.
 # These values can be used for defining compatibility or storing project-related data, and should not be changed
 # without a good reason.
-import os
 from base import git_info
 
 PUBLISHER_NAME = "KrusnikViers"
