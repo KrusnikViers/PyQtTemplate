@@ -1,19 +1,17 @@
-name: Run checks
-
+name: Check
+permissions: { }
 on:
   push:
   schedule:
     - cron: '0 9 * * 1,4'
-
-permissions: {}
-
 env:
   PYTHON_VERSION: '3.14'
 
+
 jobs:
-  flake8-lint:
+  lint:
     runs-on: ubuntu-latest
-    name: Flake8 Lint
+    name: Lint
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,6 +21,8 @@ jobs:
         uses: ./.github/actions/setup_project
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install Flake8
+        run: pip install flake8
 
       - name: flake8 Lint
         uses: py-actions/flake8@84ec6726560b6d5bd68f2a5bed83d62b52bb50ba
@@ -30,9 +30,9 @@ jobs:
           max-line-length: "121"
           exclude: "__init__.py,*_uic.py"
 
-  check-tests:
+  tests:
     runs-on: ubuntu-latest
-    name: Run tests
+    name: Tests
     strategy:
       matrix:
         python-version: [ '3.14' ]
@@ -45,15 +45,17 @@ jobs:
         uses: ./.github/actions/setup_project
         with:
           python-version: '${{ matrix.python-version }}'
+      - name: Install test utils
+        run: pip install pytest
       - name: Setup Linux
         uses: ./.github/actions/setup_linux
 
       - name: Discover and run tests
         run: xvfb-run python -m unittest discover -p '*_test.py'
 
-  measure-coverage:
+  coverage:
     runs-on: ubuntu-latest
-    name: Measure coverage
+    name: Coverage
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -63,6 +65,8 @@ jobs:
         uses: ./.github/actions/setup_project
         with:
           python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install Coverage utils
+        run: pip install pytest coverage
       - name: Setup Linux
         uses: ./.github/actions/setup_linux
 

@@ -24,9 +24,9 @@ class MainWindow(QMainWindow):
 
         self.ui = main_window_uic.Ui_MainWindow()
         self.ui.setupUi(self)
-        self.setWindowTitle(info.PROJECT_FULL_NAME)
+        self.setWindowTitle(info.PROJECT_NAME_VERSION)
 
-        self.status_bar = status_bar.StatusBar(self)
+        self.status_bar = status_bar.StatusBar(self, info.VERSION_FULL)
         self.setStatusBar(self.status_bar)
 
         self.show()
