@@ -53,18 +53,12 @@ jobs:
       - name: Setup Linux
         if: matrix.os == 'ubuntu-latest'
         uses: ./.github/actions/setup_linux
-      - name: Debug File Content
-        run: |
-          pwd
-          echo "Checking file existence and content:"
-          ls -l base/git_info.py
-          cat base/git_info.py        
 
-      - name: Create Executable
-        uses: sayyid5416/pyinstaller@31a3d88828ae07b9658ecef15818d006b7333d8a
+      - name: Run PyInstaller
+        run: pyinstaller build_tools/pyinstaller/binary.spec
+      - name: Upload
+        uses: actions/upload-artifact@v7
         with:
-          python_ver: ${{ env.PYTHON_VERSION }}
-          spec: 'build_tools/pyinstaller/binary.spec'
-          clean_checkout: false
-          requirements: 'requirements.txt'
-          upload_exe_with_name: ${{ matrix.dist_name }}
+          name: ${{ matrix.dist_name }}
+          path: dist/*
+          if-no-files-found: error
